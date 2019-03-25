@@ -13,8 +13,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class GridViewAdapter extends BaseAdapter {
-    List<String> listSource;
-    Context mainContext;
+    private List<String> listSource;
+    private Context mainContext;
 
     public GridViewAdapter(List<String> listSource, Context mainContext) {
         this.listSource = listSource;
@@ -38,7 +38,22 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        ImageView img;
+        if(convertView == null){
+            img = new ImageView(mainContext);
+            convertView = img;
+            img.setPadding(5,5,5,5);
+        }
+        else{
+            img = (ImageView) convertView;
+        }
+        String url = listSource.get(position);
+        Picasso.with(mainContext)
+                .load(url)
+                .into(img);
+
+        return convertView;
+        /*ImageView imageView;
         if (convertView == null) {
             imageView = new ImageView(mainContext);
             imageView.setLayoutParams(new GridView.LayoutParams(480, 480));
@@ -51,8 +66,13 @@ public class GridViewAdapter extends BaseAdapter {
         String url = listSource.get(position);
         Picasso.with(mainContext)
                 .load(url)
-                .fit()
-                .centerCrop().into(imageView);
+                .into(imageView);
         return imageView;
+        //Initialize ImageView
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        //Loading image from below URL into imageView
+        Picasso.with(mainContext)
+                .load("YOUR IMAGE URL HERE")
+                .into(imageView);*/
     }
 }

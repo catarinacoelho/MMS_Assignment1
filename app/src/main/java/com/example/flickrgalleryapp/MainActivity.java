@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rest.FlickrData;
@@ -23,14 +24,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         flickrService = new FlickrServiceImplementation(this);
-        List<Item> items = data.getItems();
+        List<Item> items = new ArrayList<Item>();
+        items = data.getItems();
+        //items.add("https://farm8.staticflickr.com/7843/32524124047_5656894335_m.jpg");
 
         for(Item item:items){
             String url = item.getMedia().getM();
             photos.add(url);
         }
 
-        GridView gridView = (GridView)findViewById(R.id.gridView);
+        GridView gridView = (GridView)findViewById(R.id.gridview);
         gridView.setAdapter(new GridViewAdapter(photos,this));
     }
 
