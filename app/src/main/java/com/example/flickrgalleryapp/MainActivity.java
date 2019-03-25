@@ -24,17 +24,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         flickrService = new FlickrServiceImplementation(this);
-        List<Item> items = new ArrayList<Item>();
-        items = data.getItems();
+        flickrService.getPhotos();
+        GridView gridView = (GridView)findViewById(R.id.gridview);
+        gridView.setAdapter(new GridViewAdapter(photos,this));
+
+    }
+
+    public void getItems() {
+        List<Item> items = data.getItems();
         //items.add("https://farm8.staticflickr.com/7843/32524124047_5656894335_m.jpg");
 
         for(Item item:items){
             String url = item.getMedia().getM();
             photos.add(url);
         }
-
-        GridView gridView = (GridView)findViewById(R.id.gridview);
-        gridView.setAdapter(new GridViewAdapter(photos,this));
     }
 
     public void setFlickrData(FlickrData flickrData)

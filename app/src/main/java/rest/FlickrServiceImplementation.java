@@ -19,7 +19,7 @@ public class FlickrServiceImplementation {
         this.mainActivity = mainActivity;
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.flickr.com/services/")
+                .baseUrl("https://api.flickr.com/services/feeds/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -33,9 +33,10 @@ public class FlickrServiceImplementation {
             public void onResponse(Call<FlickrData> call, Response<FlickrData> response) {
                 if(response.isSuccessful()){
                     mainActivity.setFlickrData(response.body());
+                    mainActivity.getItems();
                 }
                 else{
-                    Toast.makeText(mainActivity.getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainActivity.getApplicationContext(), "Error"+Integer.toString(response.code()), Toast.LENGTH_LONG).show();
                 }
             }
 

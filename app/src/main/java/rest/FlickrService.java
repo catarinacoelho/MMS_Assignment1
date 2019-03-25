@@ -5,6 +5,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Url;
 
 public interface FlickrService {
-    @GET("feeds/photos_public.gn?format=json")
+    @GET("photos_public.gne?format=json")
     Call<FlickrData> getPhotos();
 }
