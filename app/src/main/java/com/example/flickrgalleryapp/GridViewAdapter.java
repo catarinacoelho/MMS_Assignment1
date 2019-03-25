@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -35,22 +38,21 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Button button;
-        if(convertView == null)
-        {
-         button = new Button(mainContext);
-         button.setLayoutParams(new GridView.LayoutParams(85,85));
-         button.setPadding(8,8,8,8);
-         button.setText(listSource.get(position));
-         button.setOnClickListener(new View.OnClickListener (){
-             @Override
-             public void onClick(View v){
-
-             }
-         });
+        ImageView imageView;
+        if (convertView == null) {
+            imageView = new ImageView(mainContext);
+            imageView.setLayoutParams(new GridView.LayoutParams(480, 480));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(8, 8, 8, 8);
+        } else {
+            imageView = (ImageView) convertView;
         }
-        else
-            button = (Button)convertView;
-        return button;
+
+        String url = listSource.get(position);
+        Picasso.with(mainContext)
+                .load(url)
+                .fit()
+                .centerCrop().into(imageView);
+        return imageView;
     }
 }
