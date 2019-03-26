@@ -1,7 +1,10 @@
 package com.example.flickrgalleryapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
@@ -17,7 +20,8 @@ import rest.Item;
 public class MainActivity extends AppCompatActivity {
     FlickrServiceImplementation flickrService;
     FlickrData data;
-    List<String> photos = new ArrayList<String>();
+    static List<String> photos = new ArrayList<String>();
+    GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         flickrService = new FlickrServiceImplementation(this);
         flickrService.getPhotos();
+
+        gridView = (GridView)findViewById(R.id.gridview);
+        gridView.setAdapter(new GridViewAdapter(photos,this));
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent(MainActivity.this,ImageActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -37,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
             photos.add(url);
         }
 
-        GridView gridView = (GridView)findViewById(R.id.gridview);
-        gridView.setAdapter(new GridViewAdapter(photos,this));
     }
 
     public void setFlickrData(FlickrData flickrData)

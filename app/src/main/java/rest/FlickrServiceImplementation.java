@@ -20,10 +20,6 @@ public class FlickrServiceImplementation {
     public FlickrServiceImplementation(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
 
-        //Gson gson = new GsonBuilder()
-          //      .setLenient()
-            //    .create();
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.flickr.com/services/feeds/")
                 .addConverterFactory(GsonConverterFactory.create())
