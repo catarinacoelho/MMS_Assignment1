@@ -6,9 +6,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class Media {
 
+    @SerializedName("m")
+    @Expose
     private String m;
 
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Media() {
+    }
+
     public Media(String m) {
+        super();
         this.m = m;
     }
 

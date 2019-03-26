@@ -15,9 +15,6 @@
         android:verticalSpacing="4dp"
         android:horizontalSpacing="4dp"
         android:stretchMode="columnWidth"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-
         />
 
 </RelativeLayout>

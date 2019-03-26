@@ -4,19 +4,46 @@ package rest;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
 public class Item {
 
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("link")
+    @Expose
     private String link;
+    @SerializedName("media")
+    @Expose
     private Media media;
+    @SerializedName("date_taken")
+    @Expose
     private String dateTaken;
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("published")
+    @Expose
     private String published;
+    @SerializedName("author")
+    @Expose
     private String author;
+    @SerializedName("author_id")
+    @Expose
     private String authorId;
+    @SerializedName("tags")
+    @Expose
     private String tags;
 
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Item() {
+    }
+
     public Item(String title, String link, Media media, String dateTaken, String description, String published, String author, String authorId, String tags) {
+        super();
         this.title = title;
         this.link = link;
         this.media = media;

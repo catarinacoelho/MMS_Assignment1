@@ -4,6 +4,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.flickrgalleryapp.MainActivity;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,6 +19,10 @@ public class FlickrServiceImplementation {
 
     public FlickrServiceImplementation(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
+
+        //Gson gson = new GsonBuilder()
+          //      .setLenient()
+            //    .create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.flickr.com/services/feeds/")

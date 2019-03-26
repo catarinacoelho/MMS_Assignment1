@@ -7,14 +7,34 @@ import com.google.gson.annotations.SerializedName;
 
 public class FlickrData {
 
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("link")
+    @Expose
     private String link;
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("modified")
+    @Expose
     private String modified;
+    @SerializedName("generator")
+    @Expose
     private String generator;
+    @SerializedName("items")
+    @Expose
     private List<Item> items = null;
 
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public FlickrData() {
+    }
+
     public FlickrData(String title, String link, String description, String modified, String generator, List<Item> items) {
+        super();
         this.title = title;
         this.link = link;
         this.description = description;

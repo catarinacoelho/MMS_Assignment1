@@ -17,7 +17,7 @@ import rest.Item;
 public class MainActivity extends AppCompatActivity {
     FlickrServiceImplementation flickrService;
     FlickrData data;
-    List<String> photos;
+    List<String> photos = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         flickrService = new FlickrServiceImplementation(this);
         flickrService.getPhotos();
-        GridView gridView = (GridView)findViewById(R.id.gridview);
-        gridView.setAdapter(new GridViewAdapter(photos,this));
 
     }
 
@@ -38,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
             String url = item.getMedia().getM();
             photos.add(url);
         }
+
+        GridView gridView = (GridView)findViewById(R.id.gridview);
+        gridView.setAdapter(new GridViewAdapter(photos,this));
     }
 
     public void setFlickrData(FlickrData flickrData)
