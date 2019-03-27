@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     FlickrServiceImplementation flickrService;
     FlickrData data;
     static List<String> photos = new ArrayList<String>();
+    static List<String> titles = new ArrayList<String>();
+    static List<String> tags = new ArrayList<String>();
+    static List<String> dates = new ArrayList<String>();
     GridView gridView;
 
     @Override
@@ -37,16 +40,18 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 String item = photos.get(position);
+                String title = titles.get(position);
+                String tag = tags.get(position);
+                String date = dates.get(position);
                 //Create intent
                 Intent intent = new Intent(MainActivity.this, ImageActivity.class);
                 intent.putExtra("url", item);
+                intent.putExtra("title", title);
+                intent.putExtra("tag", tag);
+                intent.putExtra("date", date);
 
                 //Start details activity
                 startActivity(intent);
-
-                /*Intent intent = new Intent(MainActivity.this,ImageActivity.class);
-                intent.putExtra("photo", photos.get(position));
-                startActivity(intent);*/
 
             }
         });
@@ -59,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         for(Item item:items){
             String url = item.getMedia().getM();
             photos.add(url);
+            titles.add(item.getTitle());
+            tags.add(item.getTags());
+            dates.add(item.getDateTaken());
         }
         gridView = (GridView) findViewById(R.id.gridview);
         GridViewAdapter gridAdapter = new GridViewAdapter(photos,this);

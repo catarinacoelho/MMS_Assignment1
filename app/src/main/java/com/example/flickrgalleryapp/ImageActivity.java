@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -16,17 +17,23 @@ public class ImageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
+        String title = intent.getStringExtra("title");
+        String tag = intent.getStringExtra("tag");
+        String date = intent.getStringExtra("date");
+
+        TextView titleTextView = (TextView) findViewById(R.id.title);
+        titleTextView.setText("Title: " + title);
+
+        TextView tagTextView = (TextView) findViewById(R.id.tag);
+        tagTextView.setText("Tags: " + tag);
+
+        TextView dateTextView = (TextView) findViewById(R.id.date);
+        dateTextView.setText("Date: " + date);
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         Picasso.with(ImageActivity.this)
                 .load(url)
                 .into(imageView);
-/*
-        Intent intent = getIntent();
-        int photo = intent.getExtras().getInt("photo");
 
-        ImageView imageView = findViewById(R.id.imageView);
-
-*/
     }
 }
