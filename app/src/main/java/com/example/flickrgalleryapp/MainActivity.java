@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +28,25 @@ public class MainActivity extends AppCompatActivity {
         flickrService = new FlickrServiceImplementation(this);
         flickrService.getPhotos();
 
-        gridView = (GridView)findViewById(R.id.gridview);
-        gridView.setAdapter(new GridViewAdapter(photos,this));
+        gridView = (GridView) findViewById(R.id.gridview);
+        GridViewAdapter gridAdapter = new GridViewAdapter(photos,this);
+        gridView.setAdapter(gridAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(MainActivity.this,ImageActivity.class);
-                intent.putExtra("position", position);
+
+                String item = photos.get(position);
+                //Create intent
+                Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+                intent.putExtra("url", item);
+
+                //Start details activity
                 startActivity(intent);
+
+                /*Intent intent = new Intent(MainActivity.this,ImageActivity.class);
+                intent.putExtra("photo", photos.get(position));
+                startActivity(intent);*/
 
             }
         });
@@ -47,12 +55,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void getItems() {
         List<Item> items = data.getItems();
-        //items.add("https://farm8.staticflickr.com/7843/32524124047_5656894335_m.jpg");
 
         for(Item item:items){
             String url = item.getMedia().getM();
             photos.add(url);
         }
+        gridView = (GridView) findViewById(R.id.gridview);
+        GridViewAdapter gridAdapter = new GridViewAdapter(photos,this);
+        gridView.setAdapter(gridAdapter);
+
 
     }
 

@@ -15,12 +15,18 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
 
         Intent intent = getIntent();
-        int position = intent.getExtras().getInt("position");
+        String url = intent.getStringExtra("url");
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        Picasso.with(ImageActivity.this)
+                .load(url)
+                .into(imageView);
+/*
+        Intent intent = getIntent();
+        int photo = intent.getExtras().getInt("photo");
 
         ImageView imageView = findViewById(R.id.imageView);
-        Picasso.with(ImageActivity.this)
-                .load(MainActivity.photos.get(position))
-                .into(imageView);
 
+*/
     }
 }
