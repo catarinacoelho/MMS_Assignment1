@@ -3,6 +3,8 @@ package com.example.flickrgalleryapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +18,7 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
 
         Intent intent = getIntent();
-        String url = intent.getStringExtra("url");
+        final String url = intent.getStringExtra("url");
         String title = intent.getStringExtra("title");
         String tag = intent.getStringExtra("tag");
         String date = intent.getStringExtra("date");
@@ -34,6 +36,15 @@ public class ImageActivity extends AppCompatActivity {
         Picasso.with(ImageActivity.this)
                 .load(url)
                 .into(imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ImageActivity.this, FullSizeImageActivity.class);
+                Intent fullScreen = intent.putExtra("fullScreen", url);
+                startActivity(intent);
+            }
+        });
 
     }
 }
